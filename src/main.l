@@ -16,20 +16,20 @@ UNICAMP unicamp.br
 %%
 
 [\n \t] {
-//	printf("New line\n");
+//	printf("New line, espaço ou tab\n");
 }
 
 
 {VALIDO}*{INVALIDO}+{VALIDO}*[@]{VALIDO}*{INVALIDO}+{VALIDO}* 	{
-//									printf("ambos [%s]\n", yytext);
-}
-
-{VALIDO}*[@]{VALIDO}*{INVALIDO}+{VALIDO}* 			{
-//									printf("depois [%s]\n", yytext);
+//									printf("Caractre invalido antes e depois do @ [%s]\n", yytext);
 }
 
 {VALIDO}*{INVALIDO}+{VALIDO}*[@]{VALIDO}* 			{
-//									printf("antes [%s]\n", yytext);
+//									printf("Caractre invalido antes do @ [%s]\n", yytext);
+}
+
+{VALIDO}*[@]{VALIDO}*{INVALIDO}+{VALIDO}* 			{
+//									printf("Caractre invalido depois do @ [%s]\n", yytext);
 }
 
 
@@ -37,13 +37,13 @@ UNICAMP unicamp.br
 				feec += 1; 
 				unicamp += 1;
 				generico += 1;
-//			     	printf("Encontrei domínio FEEC %s\n", yytext);
+//			     	printf("Encontrei domínio FEEC [%s]\n", yytext);
 } 
 
 {VALIDO}+[@]{VALIDO}*{UNICAMP} {	
 				unicamp += 1;
 				generico += 1;
-//				printf("Encontrei Unicamp %s\n", yytext);
+//				printf("Encontrei dominio Unicamp [%s]\n", yytext);
 }
 
 ({VALIDO}+[@]{VALIDO}+) { 
@@ -52,11 +52,11 @@ UNICAMP unicamp.br
 }
 
 {VALIDO}*{INVALIDO}+{VALIDO}* {
-//				printf("algo errado[%s]\n", yytext);
+//				printf("Cadeia com caracteres invalidos[%s]\n", yytext);
 }
 
 {INVALIDO}*{VALIDO}+{INVALIDO}* {
-//				printf("certo no lugar errado[%s]\n", yytext);
+//				printf("Cadeia com caracteres validos mas sem formar email[%s]\n", yytext);
 }
 
 
